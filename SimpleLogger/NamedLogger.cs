@@ -44,5 +44,9 @@ namespace SimpleLogger
             return logger.GetEntriesCount(type);
         }
 
+        public void Flush()
+        {
+            logger.Flush();
+        }
     }
 }

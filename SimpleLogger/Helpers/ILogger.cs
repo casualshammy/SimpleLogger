@@ -14,6 +14,8 @@ namespace SimpleLogger.Helpers
 
         long GetEntriesCount(LogEntryType type);
 
+        void Flush();
+
     }
 
     public interface ILoggerDisposable : ILogger, IDisposable { }

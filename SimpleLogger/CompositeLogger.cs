@@ -48,6 +48,12 @@ namespace SimpleLogger
             return value;
         }
 
+        public void Flush()
+        {
+            foreach (ILogger logger in Loggers)
+                logger.Flush();
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
