@@ -48,6 +48,8 @@ namespace SimpleLogger
             return value;
         }
 
+        public NamedLogger this[string name] => new NamedLogger(this, name);
+
         public void Flush()
         {
             foreach (ILogger logger in Loggers)

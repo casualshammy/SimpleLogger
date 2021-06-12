@@ -82,6 +82,8 @@ namespace SimpleLogger
             return value;
         }
 
+        public NamedLogger this[string name] => new NamedLogger(this, name);
+
         protected virtual void Dispose(bool disposing)
         {
            if (!disposedValue)

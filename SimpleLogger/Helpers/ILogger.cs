@@ -14,6 +14,8 @@ namespace SimpleLogger.Helpers
 
         long GetEntriesCount(LogEntryType type);
 
+        NamedLogger this[string name] { get; }
+
         void Flush();
 
     }

@@ -8,15 +8,19 @@ namespace SimpleLogger
     {
         private bool disposedValue;
         private readonly ConcurrentDictionary<LogEntryType, long> stats = new ConcurrentDictionary<LogEntryType, long>();
+        private readonly static object consoleLock = new object();
 
         public ConsoleLogger() { }
 
         private static void ConsoleWriteColourText(string text, ConsoleColor colour)
         {
-            ConsoleColor oldColour = Console.ForegroundColor;
-            Console.ForegroundColor = colour;
-            Console.Write(text);
-            Console.ForegroundColor = oldColour;
+            lock (consoleLock)
+            {
+                ConsoleColor oldColour = Console.ForegroundColor;
+                Console.ForegroundColor = colour;
+                Console.Write(text);
+                Console.ForegroundColor = oldColour;
+            }
         }
 
         public void Info(string text, string name = null)
@@ -55,6 +59,8 @@ namespace SimpleLogger
             stats.TryGetValue(type, out long value);
             return value;
         }
+
+        public NamedLogger this[string name] => new NamedLogger(this, name);
 
         protected virtual void Dispose(bool disposing)
         {
